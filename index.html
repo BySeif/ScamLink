@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For Alya 💕</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ff9ecf, #ffcce6);
+      overflow-x: hidden;
+    }
+
+    #mainPhoto {
+      width: 230px;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 20px;
+      margin-top: 60px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    #finalPhoto {
+      width: 260px;
+      border-radius: 20px;
+      margin-top: 30px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    h1 {
+      margin-top: 30px;
+      font-size: 2.3rem;
+      color: white;
+      padding: 0 20px;
+    }
+
+    .buttons {
+      margin-top: 40px;
+    }
+
+    button {
+      font-size: 1.3rem;
+      padding: 14px 28px;
+      margin: 10px;
+      border-radius: 30px;
+      border: none;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+
+    #yesBtn {
+      background-color: #ff3366;
+      color: white;
+    }
+
+    #noBtn {
+      background-color: #666;
+      color: white;
+      position: relative;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<img id="mainPhoto" src="mainphoto.jpg" alt="Alya">
+
+<h1>Will you be my Valentine? 💖</h1>
+
+<div class="buttons">
+  <button id="yesBtn">Yes 💕</button>
+  <button id="noBtn">No 😢</button>
+</div>
+
+<script>
+  const yesBtn = document.getElementById("yesBtn");
+  const noBtn = document.getElementById("noBtn");
+
+  let noMessages = [
+    "Are you sure? 🥺",
+    "Really sure??",
+    "Alya… that’s kinda cold 😔",
+    "Think again...",
+    "You sure about that?",
+    "Okay now you're just testing me"
+  ];
+
+  let index = 0;
+  let scale = 1;
+
+  noBtn.addEventListener("click", function() {
+
+    if (index < noMessages.length) {
+      noBtn.textContent = noMessages[index];
+      index++;
+    } else {
+      noBtn.textContent = "Still no? 😭";
+    }
+
+    scale += 0.25;
+    yesBtn.style.transform = "scale(" + scale + ")";
+
+    noBtn.style.position = "absolute";
+    noBtn.style.left = Math.random() * 80 + "%";
+    noBtn.style.top = Math.random() * 80 + "%";
+  });
+
+  yesBtn.addEventListener("click", function() {
+    document.body.innerHTML = `
+      <h1 style="margin-top:100px; font-size:2.4rem; color:white; padding:20px;">
+        You had no choice 😌💕<br><br>
+        Guess we have plans now.
+      </h1>
+
+      <img id="finalPhoto" src="finalphoto.jpg" alt="Us">
+
+    `;
+
+    launchConfetti();
+    launchHearts();
+  });
+
+  function launchConfetti() {
+    for (let i = 0; i < 120; i++) {
+      const confetti = document.createElement("div");
+      confetti.style.position = "fixed";
+      confetti.style.width = "10px";
+      confetti.style.height = "10px";
+      confetti.style.backgroundColor =
+        ["#ff4d88", "#ffffff", "#ff99cc"][Math.floor(Math.random() * 3)];
+      confetti.style.left = Math.random() * 100 + "vw";
+      confetti.style.top = "-10px";
+      confetti.style.transition = "top 2s linear";
+
+      document.body.appendChild(confetti);
+
+      setTimeout(() => {
+        confetti.style.top = "100vh";
+      }, 10);
+
+      setTimeout(() => {
+        confetti.remove();
+      }, 2000);
+    }
+  }
+
+  function launchHearts() {
+    for (let i = 0; i < 25; i++) {
+      const heart = document.createElement("div");
+      heart.innerHTML = "💖";
+      heart.style.position = "fixed";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.bottom = "0";
+      heart.style.fontSize = "30px";
+      heart.style.transition = "bottom 3s ease-out, opacity 3s";
+      heart.style.opacity = "1";
+
+      document.body.appendChild(heart);
+
+      setTimeout(() => {
+        heart.style.bottom = "100vh";
+        heart.style.opacity = "0";
+      }, 10);
+
+      setTimeout(() => {
+        heart.remove();
+      }, 3000);
+    }
+  }
+</script>
+
+</body>
+</html>
